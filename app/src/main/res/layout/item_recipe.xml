@@ -15,23 +15,12 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:textAppearance="?android:attr/textAppearanceListItem"
         app:layout_constraintTop_toTopOf="@id/itemRecipe"
         app:layout_constraintStart_toStartOf="@id/itemRecipe"
         app:layout_constraintEnd_toEndOf="@id/itemRecipe"
+        app:layout_constraintBottom_toBottomOf="@id/itemRecipe"
         tools:text="Cupcake"/>
-
-    <TextView
-        android:id="@+id/ingredientsCountText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
-        app:layout_constraintLeft_toLeftOf="@id/itemRecipe"
-        app:layout_constraintRight_toRightOf="@id/itemRecipe"
-        app:layout_constraintTop_toBottomOf="@id/recipeNameText"
-        tools:text="6 ingredients"/>
 
 </android.support.constraint.ConstraintLayout>

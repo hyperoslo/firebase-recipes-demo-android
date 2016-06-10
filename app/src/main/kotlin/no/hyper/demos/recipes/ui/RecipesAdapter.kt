@@ -89,12 +89,10 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.ViewHolder>() {
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         private val nameTextView = view.recipeNameText
-        private val ingredientsCountTextView = view.ingredientsCountText
 
         var recipe: Recipe? = null
             set(value) {
                 nameTextView.text = value?.name
-                ingredientsCountTextView.text = "6 ingredients"
             }
 
     }

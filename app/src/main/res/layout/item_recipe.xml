@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemRecipe"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight">
+
+    <TextView
+        android:id="@+id/recipeNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        app:layout_constraintTop_toTopOf="@id/itemRecipe"
+        app:layout_constraintStart_toStartOf="@id/itemRecipe"
+        app:layout_constraintEnd_toEndOf="@id/itemRecipe"
+        tools:text="Cupcake"/>
+
+    <TextView
+        android:id="@+id/ingredientsCountText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+        app:layout_constraintLeft_toLeftOf="@id/itemRecipe"
+        app:layout_constraintRight_toRightOf="@id/itemRecipe"
+        app:layout_constraintTop_toBottomOf="@id/recipeNameText"
+        tools:text="6 ingredients"/>
+
+</android.support.constraint.ConstraintLayout>

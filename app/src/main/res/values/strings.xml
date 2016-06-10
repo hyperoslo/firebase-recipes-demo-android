@@ -1,7 +1,12 @@
 <resources>
 
     <string name="app_name">Recipes Demo</string>
-
     <string name="title_activity_recipes">Recipes</string>
+
+    <string name="title_dialog_new_recipe">Create new recipe</string>
+    <string name="hint_new_recipe_name">Name your new recipe</string>
+
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

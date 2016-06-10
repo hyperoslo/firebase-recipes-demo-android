@@ -1,8 +1,12 @@
 package no.hyper.demos.recipes.ui
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
+import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_recipes.*
 import no.hyper.demos.recipes.R
 import no.hyper.demos.recipes.models.Recipe
@@ -10,6 +14,9 @@ import no.hyper.demos.recipes.models.Recipe
 class RecipesActivity : AppCompatActivity() {
 
     private val recipesAdapter = RecipesAdapter()
+    private lateinit var newRecipeDialog: Dialog
+
+    private val firebaseRef by lazy { FirebaseDatabase.getInstance().getReference("recipes") }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,40 +27,34 @@ class RecipesActivity : AppCompatActivity() {
         recipesList.adapter = recipesAdapter
         recipesList.layoutManager = LinearLayoutManager(this)
 
-        populateDummyRecipes()
+        newRecipeDialog = AlertDialog.Builder(this)
+                .setView(R.layout.dialog_new_recipe)
+                .setTitle(R.string.title_dialog_new_recipe)
+                .setPositiveButton(R.string.submit, { dialog, which -> persistRecipe() })
+                .setNegativeButton(R.string.cancel, { dialog, which -> dismissNewRecipeDialog() })
+                .create()
+
+        addRecipeButton.setOnClickListener { openNewRecipeDialog() }
     }
 
-    private fun populateDummyRecipes() {
-        val dummyRecipes = listOf(
-                Recipe("Angel Delight"),
-                Recipe("Butter Braid"),
-                Recipe("Cool Whip"),
-                Recipe("Dream Whip"),
-                Recipe("Entenmann's"),
-                Recipe("Fruitcake"),
-                Recipe("Gingerbread"),
-                Recipe("Hummingbird Cake"),
-                Recipe("Ice Cream"),
-                Recipe("Jell-O"),
-                Recipe("Kladdkaka"),
-                Recipe("Ladyf"),
-                Recipe("My-T-Fine"),
-                Recipe("Meringue"),
-                Recipe("Ontbijtkoek"),
-                Recipe("Pavlova"),
-                Recipe("Queen of Puddings"),
-                Recipe("Rum baba"),
-                Recipe("Swiss roll"),
-                Recipe("Tiramisu"),
-                Recipe("Upside-down cake"),
-                Recipe("Vla"),
-                Recipe("White sugar sponge cake"),
-                Recipe("Xurros"),
-                Recipe("YoGo"),
-                Recipe("Zefir")
-        )
+    private fun openNewRecipeDialog() {
+        newRecipeDialog.show()
+    }
 
-        dummyRecipes.forEach { recipesAdapter.add(it) }
+    private fun dismissNewRecipeDialog() {
+        val nameInput = newRecipeDialog.findViewById(R.id.recipeNameInput) as TextInputEditText
+
+        nameInput.text = null
+        newRecipeDialog.dismiss()
+    }
+
+    private fun persistRecipe() {
+        val nameInput = newRecipeDialog.findViewById(R.id.recipeNameInput) as TextInputEditText
+        val recipe = Recipe(nameInput.text.toString(), null)
+
+        firebaseRef.push().setValue(recipe.payload)
+
+        dismissNewRecipeDialog()
     }
 
 }
